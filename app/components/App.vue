@@ -20,36 +20,33 @@
     </TabView>
   </Page>
 </template>
-
-
 <script>
-import groceryData from "../grocery-data.json";
+
 import GroceryList from "./GroceryList";
 import AddItem from "./AddItem";
+
 
 export default {
   components: { GroceryList },
   data() {
     return {
-      items: groceryData.groceryItems,
+      
     };
   },
   methods: {
     onAddTap() {
-      const newId = new Date().getTime();
-      this.$showModal(AddItem, {
-        props: { id: newId }
-      }).then(newItem => {
+      this.$showModal(AddItem, {}).then(newItem => {
         if (newItem) {
-          this.items.unshift(newItem);
+          console.log(newItem);
+          this.$store.dispatch("insert", newItem);
         }
       });
     },
   },
+  created() {
+    this.items = this.$store.getters.todoItems;
+  },
   computed: {
-    all: function() {
-      this.items;
-    },
     onFilterDone: function() {
       return this.items.filter(item => item.done);
     },

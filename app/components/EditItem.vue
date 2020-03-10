@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ["id"],
+  props: ["item"],
   data: function() {
     return {
         name: ''

@@ -10,7 +10,6 @@
 
 <script>
 export default {
-  props: ["id"],
   data: function() {
     return {
         name: ''
@@ -18,8 +17,8 @@ export default {
   },
   methods: {
     onSaveTap() {
-        const newItem = { id: this.id, name: this.name, done: false, deleted: false };
-        this.$modal.close(newItem);
+        const item = { name: this.name, done: false };
+        this.$modal.close(item);
     }
   }
 };

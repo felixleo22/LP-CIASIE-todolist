@@ -34,22 +34,24 @@ export default {
     },
     toggleDone: function() {
       this.groceryItem.done = !this.groceryItem.done;
+      this.$store.dispatch("update", this.groceryItem);
     },
     toggleDelete: function() {
       this.$showModal(DeleteItemVue, { 
       }).then(res => {
         if(res) {
-           this.groceryItem.deleted = true;
-           this.$navigateBack();
+           this.$store.dispatch("delete", this.groceryItem);
+           this.$navigateBack(res);
         }
       });
     },
     onEditTap() {
       this.$showModal(EditItemVue, {
-        props: { id: this.groceryItem.id  }
+        props: { item: this.groceryItem  }
       }).then(nom => {
         if (nom) {
           this.groceryItem.name = nom;
+          this.$store.dispatch("update", this.groceryItem);
         }
       });
     },
