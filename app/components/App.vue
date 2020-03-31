@@ -37,7 +37,7 @@ export default {
     onAddTap() {
       this.$showModal(AddItem, {}).then(newItem => {
         if (newItem) {
-          console.log(newItem);
+          (newItem);
           this.$store.dispatch("insert", newItem);
         }
       });
@@ -47,6 +47,9 @@ export default {
     this.items = this.$store.getters.todoItems;
   },
   computed: {
+    items: function() {
+      return this.$store.getters.todoItems;
+    },
     onFilterDone: function() {
       return this.items.filter(item => item.done);
     },
